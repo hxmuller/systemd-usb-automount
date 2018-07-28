@@ -1,0 +1,11 @@
+[Unit]
+Description=Mount USB Drive on %i
+After=local-fs.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=false
+ExecStart=/usr/bin/udisksctl mount -b /dev/%i
+
+[Install]
+WantedBy=multi-user.target
