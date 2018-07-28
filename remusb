@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# sources:
+#   http://tuxdiary.com/2013/02/20/unmount-all-usb-devices-attached/
+#   http://tuxdiary.com/2016/05/31/safely-remove-drives-terminal/
+
+UDEVADM=/bin/udevadm
+UDISKSCTL=/usr/bin/udisksctl
+
+if [ ! -x $UDEVADM ]
+then
+    # TODO - send error message somewhere
+    exit 1
+fi
+
+if [ ! -x $UDISKSCTL ]
+then
+    # TODO - send error message somewhere
+    exit 1
+fi
+
+CMD="$UDEVADM info -q all -n"
+CMD2="$UDISKSCTL"
+
+for disk in /dev/sd[a-z][1-9]
+do
+    ATTACH=$( $CMD $disk | grep ID_BUS | cut -f2 -d= )
+    if [ "$ATTACH" == "usb" ]; then
+        $CMD2 unmount -b $disk # TODO - if fail, send error message somewhere
+	$CMD2 power-off -b $disk # TODO - if fail, send error message somewhere
+    fi
+done
