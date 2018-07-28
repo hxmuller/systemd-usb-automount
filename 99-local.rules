@@ -1,0 +1,1 @@
+KERNEL=="sd[a-z][0-9]", SUBSYSTEMS=="usb", ACTION=="add", ENV{SYSTEMD_USER_WANTS}="usb-mount@%k.service"
