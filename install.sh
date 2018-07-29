@@ -18,11 +18,11 @@ done
 
 $INSTALL -b -m 644 99-local.rules /etc/udev/rules.d/
 $INSTALL -b -m 644 10-udisks2.rules /etc/polkit-1/rules.d/
-$INSTALL -b -m 644 usb-mount@.service $HOME/.config/systemd/user/
+$INSTALL -b -m 644 -g $SUDO_USER -o $SUDO_USER usb-mount@.service $HOME/.config/systemd/user/
 
 if [ ! -d $HOME/.local/bin ]
 then
   $MKDIR -p $HOME/.local/bin
 fi
 
-$INSTALL -b -m 744 remusb
+$INSTALL -b -m 744 -g $SUDO_USER -o $SUDO_USER remusb $HOME/.local/bin/
