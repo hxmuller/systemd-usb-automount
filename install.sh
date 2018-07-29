@@ -7,7 +7,6 @@
 SYSTEMD=/bin/systemd
 INSTALL=/usr/bin/install
 MKDIR=/bin/mkdir
-UDEVADM=/bin/udevadm
 SYSTEMCTL=/bin/systemctl
 
 if [ ! -x $SYSTEMD ]
