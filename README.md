@@ -1,5 +1,5 @@
 # systemd-usb-automount
-A simple usb automount setup for Debian installations. When USB flash storage is inserted into an open port, it is automatically mounted on /media/$USER/<LABEL>.
+A simple usb automount setup for Debian installations. When USB flash storage is inserted into an open port, it is automatically mounted on /media/$USER/\<LABEL\>.
 
 To install, after download run:
 
