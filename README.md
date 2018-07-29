@@ -6,7 +6,7 @@ Requirements:
 - udisks2
 - policykit-1
 
-Most standard Debian installs will include systemd, udisks2 and policykit-1 will need to be installed:
+Most standard Debian installs will include systemd, udisks2 and policykit-1 may need to be installed depending on your local installation. If the install.sh script fails, you may need to install either or both:
 
 ```
 $ sudo apt install udisks2 policykit-1
