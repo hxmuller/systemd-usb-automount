@@ -1,8 +1,11 @@
 # systemd-usb-automount
 A simple usb automount setup for Debian, Arch, and their derivative
 distributions. When USB flash
-storage is inserted into an open port, it is automatically mounted on
-/media/$USER/\<LABEL\>.
+storage is inserted into an open port, it is automatically mounted in
+/media/$USER/\<LABEL\> one of two places depending on distribution:
+
+- /media/$USER/\<LABEL\>
+- /run/media/$USER/\<LABEl\>
 
 ## Requirements:
 
@@ -32,8 +35,13 @@ either or both:
 
 To install after checking requirements are met run:
 
-``` $ chmod +x install.sh $ sudo ./install.sh ``` To unmount and power
-off the USB flash storage, run the included executable script:
+```
+$ chmod +x install.sh
+$ sudo ./install.sh
+```
+
+To unmount and power off the USB flash storage, run the included
+executable script:
 
 ```
 $ remusb
