@@ -93,8 +93,8 @@ then
     cat << EOF >> /home/$SUDO_USER/.bashrc
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
+if [ -d /home/$SUDO_USER/.local/bin" ]; then
+    PATH="/home/$SUDO_USER/.local/bin:$PATH"
 fi
 EOF
 fi
