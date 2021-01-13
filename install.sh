@@ -85,9 +85,10 @@ if [ ! -d /home/$SUDO_USER/.config/systemd/user ]
 then
     $MKDIR -p /home/$SUDO_USER/.config/systemd/user
 fi
-if [ ! -d $HOME/.local/bin ]
+if [ ! -d /home/$SUDO_USER/.local/bin ]
 then
-    $MKDIR -p $HOME/.local/bin
+    $MKDIR -p /home/$SUDO_USER/.local/bin
+    echo "Add .local/bin to your PATH variable"
 fi
 
 # Install files
