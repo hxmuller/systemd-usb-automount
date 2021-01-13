@@ -13,6 +13,10 @@ ARCH_POLKIT=/usr/lib/polkit-1/polkitd
 INSTALL=/usr/bin/install
 MKDIR=/bin/mkdir
 SYSTEMCTL=/bin/systemctl
+LSB_RELEASE=/usr/bin/lsb_release
+GREP=/bin/grep
+AWK=/usr/bin/awk
+DISTRIBUTION=$( lsb_release -a 2>/dev/null | grep Description | awk '{print $2}' )
 
 _die() {
     echo >&2 "${*}"
@@ -24,32 +28,37 @@ if [ `id -u` -ne 0 ]; then
     _die "Need to be root"
 fi
 
+case $DISTRIBUTION in
+    Debian|Ubuntu)
+        SYSTEMD=$DEBIAN_SYSTEMD
+        UDISKS2=$DEBIAN_UDISKS2
+        POLKIT=$DEBIAN_POLKIT
+        ;;
+    Arch|Manjaro)
+        SYSTEMD=$ARCH_SYSTEMD
+        UDISKS2=$ARCH_UDISKS2
+        POLKIT=$ARCH_POLKIT
+    *)
+        _die "Must manually add distribution to case statement"
+esac
+
 # Check for systemd
-for daemon in "$DEBIAN_SYSTEMD $ARCH_SYSTEMD"
-do
-    if [ ! -x $daemon ]
-    then
-      _die "$SYSTEMD missing, is systemd installed?"
-    fi
-done
+if [ ! -e "$SYSTEMD" ]
+then
+  _die "${dist}_SYSTEMD missing, is systemd installed?"
+fi
 
 # Check for udisks2
-for daemon in "$DEBIAN_UDISKS2 $ARCH_UDISKS2"
-do
-    if [ ! -x $daemon ]
-    then
-        _die echo "$daemon missing, is udisks2 installed?"
-    fi
-done
+if [ ! -e "$UDISKS2" ]
+then
+    _die echo "${dist}_UDISKS2 missing, is udisks2 installed?"
+fi
 
 # Check for polkit
-for daemon in "$DEBIAN_POLKIT $ARCH_POLKIT"
-do
-    if [ ! -x $daemon ]
-    then
-      _die "$daemon missing, is polkit installed?"
-    fi
-done
+if [ ! -e "$POLKIT" ]
+then
+  _die "${dist}_POLKIT missing, is polkit installed?"
+fi
 
 # Udev should be installed, check anyway
 if [ ! -d /etc/udev/rules.d ]
