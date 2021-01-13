@@ -1,24 +1,39 @@
 # systemd-usb-automount
-A simple usb automount setup for Debian installations. When USB flash storage is inserted into an open port, it is automatically mounted on /media/$USER/\<LABEL\>.
+A simple usb automount setup for Debian, Arch, and their derivative
+distributions. When USB flash
+storage is inserted into an open port, it is automatically mounted on
+/media/$USER/\<LABEL\>.
 
-Requirements:
+## Requirements:
+
 - systemd
 - udisks2
-- policykit-1
+- polkit
 
-Most standard Debian installs will include systemd, udisks2 and policykit-1 may need to be installed depending on your local installation. If the install.sh script fails, you may need to install either or both:
+### Arch and derivatives
 
-```
-$ sudo apt install udisks2 policykit-1
-```
+Arch - check to see if requirements are met and install any if
+necessary.
 
-To install, after download run:
+``` $ sudo pacman -S <package name[s]> ```
 
-```
-$ chmod +x install.sh
-$ sudo ./install.sh
-```
-To unmount and power off the USB flash storage, run the included executable script:
+Manjaro Arm Sway Edition - includes the requirements.
+
+### Debian and derivatives:
+
+Most standard Debian installs will include systemd. udisks2 and
+policykit-1 may need to be installed depending on your local
+installation. If the install.sh script fails, you may need to install
+either or both:
+
+``` $ sudo apt install udisks2 policykit-1 ```
+
+## Installation
+
+To install after checking requirements are met run:
+
+``` $ chmod +x install.sh $ sudo ./install.sh ``` To unmount and power
+off the USB flash storage, run the included executable script:
 
 ```
 $ remusb
