@@ -38,6 +38,7 @@ case $DISTRIBUTION in
         SYSTEMD=$ARCH_SYSTEMD
         UDISKS2=$ARCH_UDISKS2
         POLKIT=$ARCH_POLKIT
+        ;;
     *)
         _die "Must manually add distribution to case statement"
 esac
