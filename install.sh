@@ -76,7 +76,7 @@ do
     fi
 done
 
-# Create directories if necessary
+# Create polkit and systemd directories if necessary
 if [ ! -d /etc/polkit-1/rules.d ]
 then
     $MKDIR /etc/polkit-1/rules.d
@@ -85,10 +85,19 @@ if [ ! -d /home/$SUDO_USER/.config/systemd/user ]
 then
     $MKDIR -p /home/$SUDO_USER/.config/systemd/user
 fi
+
+# Create .local/bin if not found and add to PATH
 if [ ! -d /home/$SUDO_USER/.local/bin ]
 then
     $MKDIR -p /home/$SUDO_USER/.local/bin
     echo "Add .local/bin to your PATH variable"
+    cat << EOF >> /home/$SUDO_USER/.bashrc
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+EOF
 fi
 
 # Install files
